@@ -1,65 +1,75 @@
 <script lang="ts">
-import Tooltip from "./Tooltip.svelte";
-import position_marker from "../assets/position-marker.svg"
-import solar_system from "../assets/solar-system.svg"
-import spaceship from "../assets/spaceship.svg"
-import receive_money from "../assets/receive-money.svg"
-import checklist from "../assets/checklist.svg"
+    import position_marker from "../assets/position-marker.svg"
+    import solar_system from "../assets/solar-system.svg"
+    import spaceship from "../assets/spaceship.svg"
+    import cog from "../assets/cog.svg"
+    import checklist from "../assets/checklist.svg"
+    import id_card from "../assets/id-card.svg"
 
-let curClass = 'Light'
-function switchColClass(){
-    switch (curClass) {
-        case 'Dark':
-            curClass = 'Light'
-            break;
-        case 'Light':
-            curClass = 'Dark'
-            break;
+    import {Link} from "svelte-routing";
 
+    let HideBar = false;
+    let curClass = 'Light'
+
+    function switchColClass() {
+        switch (curClass) {
+            case 'Dark':
+                curClass = 'Light'
+                break;
+            case 'Light':
+                curClass = 'Dark'
+                break;
+        }
     }
-}
+
 
 </script>
 
 <nav id="navbar" class="{curClass}">
     <ul id="navbar-ul">
+        <li class="navili {curClass}">
+            <Link to="/Agent">
+            <img src="{id_card}" alt="">
+            </Link>
+        </li>
         <li class="navili {curClass}" id="nav-Fleet">
-            <a href="#/Fleet">
-                <Tooltip Dark={true} Desc="Fleet management" />
+            <Link to="/Fleet">
                 <img src="{spaceship}" alt="">
-            </a>
+            </Link>
         </li>
         <li class="navili {curClass}" id="nav-Navigator">
-            <a href="#/Navigator">
-                <Tooltip Dark={true} Desc="Navigate systems and waypoints" />
+            <Link to="/Navigator">
                 <img src="{solar_system}" alt="">
-            </a>
+            </Link>
         </li>
         <li class="navili {curClass}" id="nav-Contracts">
-            <a href="#/Contracts">
-                <Tooltip Dark={true} Desc="Check contracts" />
+            <Link to="/Contracts">
                 <img src="{checklist}" alt="">
-            </a>
+            </Link>
         </li>
         <li class="navili {curClass}" id="nav-Waypoint">
-            <a href="#/Waypoint">
-                <Tooltip Dark={true} Desc="Check current waypoint" />
+            <Link to="/Waypoint">
                 <img src="{position_marker}" alt="">
-            </a>
+            </Link>
+        </li>
+        <li class="navili {curClass}" id="nav-Settings">
+            <div on:click={switchColClass} class="nav-a">
+                <img src="{cog}" alt="">
+            </div>
         </li>
     </ul>
 </nav>
 
 <style>
     @media only screen and (max-width: 600px) {
-        #navbar{
-
+        #navbar {
             width: 100vw;
             height: 5rem;
         }
     }
+
     @media only screen and (min-width: 600px) {
-        #navbar{
+        #navbar {
             bottom: 0;
             left: 0;
             top: 0;
@@ -67,51 +77,68 @@ function switchColClass(){
             height: 100vh;
             align-items: center;
         }
-        #navbar-ul{
+
+        #navbar-ul {
             padding: 0;
             height: 100%;
             justify-items: center;
             margin: 0;
             flex-direction: column;
         }
-        .navili:last-child{
-            margin-top: auto;
+
+        .navili {
+            margin-top: 1rem;
         }
-        .navili img{
+
+        .navili:last-child {
+            margin-top: auto;
+            margin-bottom: 1rem;
+        }
+
+        .navili img {
             width: 4rem;
         }
     }
 
-    #navbar{
+    #navbar {
         position: fixed;
     }
-    #navbar #navbar-ul{
+
+    #navbar #navbar-ul {
         display: flex;
         align-items: center;
         margin: 0;
     }
-    .navili{
+
+    .navili {
         list-style: none;
     }
 
-    .Light{
+    .Light {
         background-color: #FFF7D4;
         color: #C07F00;
     }
-    .Dark{
+
+    .Dark {
         background-color: #4C3D3D;
         color: #FFD95A;
     }
 
-    .navili img{
+    .Light, .Dark {
+        transition: 250ms;
+    }
+
+    .navili img {
         filter: grayscale(100%) opacity(0.7);
+        transition: 250ms;
     }
 
-    .navili.Light:hover img{
-        filter: grayscale(0) opacity(1);
+    .navili.Light img:hover {
+        filter: grayscale(0) opacity(1) invert(97%) sepia(23%) saturate(6195%) hue-rotate(314deg) brightness(105%) contrast(109%);
     }
-    .navili.Dark:hover img{
 
+    .navili.Dark img:hover {
+        filter: grayscale(0) opacity(1) invert(42%) sepia(100%) saturate(467%) hue-rotate(3deg) brightness(100%) contrast(101%);
     }
 
 </style>

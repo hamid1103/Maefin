@@ -1,9 +1,17 @@
 <script lang="ts">
-import Sidebar from "./lib/Sidebar.svelte";
-</script>
+    import Sidebar from "./lib/Sidebar.svelte";
+    import {Router, Route} from "svelte-routing";
 
-<Sidebar></Sidebar>
+    export let url = "/";
+</script>
+<Router {url}>
+    <Sidebar></Sidebar>
+    <main>
+    </main>
+</Router>
 
 <style>
-
+    main {
+        margin-left: 5rem;
+    }
 </style>
