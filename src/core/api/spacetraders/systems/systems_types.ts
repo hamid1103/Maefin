@@ -66,7 +66,25 @@ export type market = {
     }>
 }
 
-export type response_shipyard = {
+export type response_getJumpGate = {
+    data: jump_gate
+}
+
+export type jump_gate = {
+    jumprange: number,
+    factionSymbol: string,
+    connectedSystems: Array<{
+        symbol: string,
+        sectorSymbol: string,
+        type: "NEUTRON_STAR" | "RED_STAR" | "ORANGE_STAR" | "BLUE_STAR" | "YOUNG_STAR" | "WHITE_DWARF" | "BLACK_HOLE" | "HYPERGIANT" | "NEBULA" | "UNSTABLE",
+        factionSymbol: string,
+        x: number,
+        y: number,
+        distance: number
+    }>
+}
+
+export type response_getShipyard = {
     dara: shipyard
 }
 
