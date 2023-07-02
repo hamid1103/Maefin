@@ -1,11 +1,11 @@
 <script lang="ts">
-    import position_marker from "../assets/position-marker.svg"
-    import solar_system from "../assets/solar-system.svg"
-    import spaceship from "../assets/spaceship.svg"
-    import cog from "../assets/cog.svg"
-    import checklist from "../assets/checklist.svg"
-    import id_card from "../assets/id-card.svg"
-    import house from "../assets/house.svg"
+    import position_marker from "../assets/svgs/position-marker.svg"
+    import solar_system from "../assets/svgs/solar-system.svg"
+    import spaceship from "../assets/svgs/spaceship.svg"
+    import cog from "../assets/svgs/cog.svg"
+    import checklist from "../assets/svgs/checklist.svg"
+    import id_card from "../assets/svgs/id-card.svg"
+    import house from "../assets/svgs/house.svg"
     import {IsLoggedIn} from "../core/stores";
     import {Link} from "svelte-routing";
 
