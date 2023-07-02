@@ -20,8 +20,6 @@
     "vite": "^4.3.9"
   },
   "dependencies": {
-    "pixi-live2d-display": "^0.4.0",
-    "pixi-viewport": "^5.0.1",
-    "pixi.js": "^6.5.9"
+    "excalibur": "^0.27.0"
   }
 }

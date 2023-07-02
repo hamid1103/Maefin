@@ -33,7 +33,7 @@
         <Route path="/"><div transition:fly={{ y: -200 }}><Home curClass="{colors}" bind:registration={registrar} /></div></Route>
         <Route path="/Agent"><div transition:fly={{ y: -200 }}><Agent curClass="{colors}"/></div></Route>
         <Route path="/Fleet"><div transition:fly={{ y: -200 }}><Fleet curClass="{colors}" /></div></Route>
-        <Route path="/Navigator"><div transition:fly={{ y: -200 }}><StarChart /></div></Route>
+        <Route path="/Navigator"><div transition:fly={{ y: -200 }}><StarChart curClass="{colors}"/></div></Route>
         <Route path="/Contracts"><div transition:fly={{ y: -200 }}><Contracts /></div></Route>
     </main>
 </Router>

@@ -1,31 +1,54 @@
 <script>
     import {onMount} from "svelte";
-    import {StarMap} from "../core/StarChartMain";
+    import {StarMap} from "../core/StarMap/StarChartMain";
+    import {MyShips, MyToken} from "../core/stores";
+    import {API_URLS} from "../core/api/spacetraders/apiMain";
+    export let curClass;
+
     let div1;
     let canvas;
     let MapApp;
+
+    let CurShip;
+    function SwitchShip(){
+        console.log(CurShip)
+        MapApp.SwitchFocus(CurShip)
+    }
+
     onMount(async () =>{
-        MapApp = new StarMap(canvas, div1)
+        /*const ResizeObs = new ResizeObserver(entries => {
+            const entry = entries.at(0);
+            MapApp.resize()
+        })
+        ResizeObs.observe(div1)*/
+        MapApp = new StarMap(canvas)
     })
 </script>
 
 <div class="parent">
-    <div bind:this={div1} class="div1">
-        <canvas bind:this={canvas} id="starchart" />
+    <canvas bind:this={canvas} class="div1" id="starchart" />
+    <div class="div2 {curClass}">
+        <select bind:value={CurShip} on:change={SwitchShip}>
+            {#each $MyShips as ship, i (i)}
+                <option value="{i}">{ship.symbol}</option>
+            {/each}
+        </select>
     </div>
-    <div class="div2"></div>
-    <div class="div3"></div>
+    <div class="div3 {curClass}">
+    </div>
 </div>
 
 <style>
     .Light {
         background-color: #FFF7D4;
         color: #C07F00;
+        border: #C07F00 1px solid;
     }
 
     .Dark {
         background-color: #4C3D3D;
         color: #FFD95A;
+        border: #FFD95A 1px solid;
     }
 
     .Light, .Dark {
@@ -45,17 +68,16 @@
 
     .div1 {
         grid-area: 1 / 1 / 6 / 6;
-        background-color: #535bf2;
     }
 
     .div2 {
         grid-area: 1 / 1 / 2 / 3;
-        background-color: green;
+        border-radius: 10px;
     }
 
     .div3 {
         grid-area: 3 / 5 / 5 / 6;
-        background-color: red;
+        border-radius: 10px;
     }
 
 

@@ -1,7 +1,7 @@
 <script lang="ts">
     import type {agent, response_newAgent} from "../core/api/spacetraders/agent/agent_types";
     import {api, API_URLS} from "../core/api/spacetraders/apiMain";
-    import {MyAgent, MyToken, MyFaction, IsLoggedIn} from "../core/stores";
+    import {MyAgent, MyToken, MyFaction, IsLoggedIn, MyShips} from "../core/stores";
     import type {faction} from "../core/api/spacetraders/faction/factions_types";
     import {faction_symbols} from "../core/api/spacetraders/faction/factions_types";
     import Modal from "../lib/Modal.svelte";
@@ -74,6 +74,14 @@
         }).then(response => response.json())
             .then(response => {
                 MyAgent.set(response.data)
+                fetch(API_URLS.MyShips, {
+                    method: 'GET',
+                    headers: {
+                        Accept: 'application/json',
+                        Authorization: 'Bearer ' + $MyToken
+                    }
+                }).then(response=>response.json())
+                    .then(res => MyShips.set(res.data))
                 console.log(response)
                 showModalLogin = false;
                 loggedIn = true;
@@ -89,6 +97,8 @@
             })
     }
 
+
+
     function SubmitHandler(e) {
         let data = new FormData(e.target)
         console.log(data)
@@ -102,7 +112,7 @@
     }
 
     //ignore this naming sense I fucking suck
-    const getShips = (async () => {
+    const getStatus = (async () => {
         const res = await fetch(API_URLS.GetStatus, {
             method: 'GET',
             headers: {Accept: 'application/json', Authorization: 'Bearer ' + $MyToken}
@@ -125,7 +135,7 @@
     </div>
     <div class="div2 {curClass}">
         {#if loggedIn}
-            {#await getShips}
+            {#await getStatus}
                 <Loader bind:curClass></Loader>
             {:then data}
                 <div id="ServerGeneral">
