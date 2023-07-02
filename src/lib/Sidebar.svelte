@@ -5,11 +5,12 @@
     import cog from "../assets/cog.svg"
     import checklist from "../assets/checklist.svg"
     import id_card from "../assets/id-card.svg"
-
+    import house from "../assets/house.svg"
+    import {IsLoggedIn} from "../core/stores";
     import {Link} from "svelte-routing";
 
     let HideBar = false;
-    let curClass = 'Light'
+    export let curClass = 'Light'
 
     function switchColClass() {
         switch (curClass) {
@@ -28,30 +29,32 @@
 <nav id="navbar" class="{curClass}">
     <ul id="navbar-ul">
         <li class="navili {curClass}">
-            <Link to="/Agent">
-            <img src="{id_card}" alt="">
+            <Link to="/">
+                <img src="{house}" alt="">
             </Link>
         </li>
-        <li class="navili {curClass}" id="nav-Fleet">
-            <Link to="/Fleet">
-                <img src="{spaceship}" alt="">
-            </Link>
-        </li>
-        <li class="navili {curClass}" id="nav-Navigator">
-            <Link to="/Navigator">
-                <img src="{solar_system}" alt="">
-            </Link>
-        </li>
-        <li class="navili {curClass}" id="nav-Contracts">
-            <Link to="/Contracts">
-                <img src="{checklist}" alt="">
-            </Link>
-        </li>
-        <li class="navili {curClass}" id="nav-Waypoint">
-            <Link to="/Waypoint">
-                <img src="{position_marker}" alt="">
-            </Link>
-        </li>
+        {#if $IsLoggedIn}
+            <li class="navili {curClass}">
+                <Link to="/Agent">
+                    <img src="{id_card}" alt="">
+                </Link>
+            </li>
+            <li class="navili {curClass}" id="nav-Fleet">
+                <Link to="/Fleet">
+                    <img src="{spaceship}" alt="">
+                </Link>
+            </li>
+            <li class="navili {curClass}" id="nav-Navigator">
+                <Link to="/Navigator">
+                    <img src="{solar_system}" alt="">
+                </Link>
+            </li>
+            <li class="navili {curClass}" id="nav-Contracts">
+                <Link to="/Contracts">
+                    <img src="{checklist}" alt="">
+                </Link>
+            </li>
+        {/if}
         <li class="navili {curClass}" id="nav-Settings">
             <div on:click={switchColClass} class="nav-a">
                 <img src="{cog}" alt="">
@@ -65,15 +68,15 @@
         #navbar {
             width: 100vw;
             height: 5rem;
+            bottom: 0;
         }
     }
 
     @media only screen and (min-width: 600px) {
         #navbar {
-            bottom: 0;
             left: 0;
             top: 0;
-            width: 5rem;
+            width: 5vw;
             height: 100vh;
             align-items: center;
         }
@@ -102,6 +105,14 @@
 
     #navbar {
         position: fixed;
+    }
+
+    #navbar.Dark {
+        border: 1px solid #FFD95A;
+    }
+
+    #navbar.Light {
+        border: 1px solid #C07F00;;
     }
 
     #navbar #navbar-ul {
